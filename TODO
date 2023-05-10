@@ -1,0 +1,8 @@
+tengo que terminar de hacer la pagina (chatRoom)
+
+1- agregar boton para agregar canales y al apretarlo que abra un modal para introducir el id y info del canal para subirlo a la db
+2- agregar para que los canales se actualizen automaticamente al agregar uno nuevo en la db
+3- agregar funcionalidad para cambiar de canal y ver el contenido correspondiente!
+4- agregar para poder subir imagenes
+5- agregar autenticacion con google, junto a pantalla de inicio (https://mui-treasury.com/styles/text-info-content/) // que diga algo como una bievenida y que para empezar a charlar en los rooms tenes que logearte y el boton de google (Unete a la conversacion!)
+6-mejorar la UI

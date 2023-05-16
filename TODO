@@ -1,8 +1,26 @@
 tengo que terminar de hacer la pagina (chatRoom)
 
 1- agregar boton para agregar canales y al apretarlo que abra un modal para introducir el id y info del canal para subirlo a la db
-2- agregar para que los canales se actualizen automaticamente al agregar uno nuevo en la db
+----done-----
+2- agregar para que los canales se actualizen automaticamente al agregar uno nuevo en la db ---done----
 3- agregar funcionalidad para cambiar de canal y ver el contenido correspondiente!
+----done----
+(arreglar la funcionalidad del tiempo para que se actualize cada un par de segundos, con un interval)
+----done----
 4- agregar para poder subir imagenes
-5- agregar autenticacion con google, junto a pantalla de inicio (https://mui-treasury.com/styles/text-info-content/) // que diga algo como una bievenida y que para empezar a charlar en los rooms tenes que logearte y el boton de google (Unete a la conversacion!)
-6-mejorar la UI
+---done----
+5-ponen el scroll al final y a partir de ahi subir (tambien poner los mensajes en orden cronologicos)
+---kinda done----
+6-agregar iconos a los canales y que aparezca en el appbar
+---done----
+7- agregar autenticacion con google, junto a pantalla de inicio (https://mui-treasury.com/styles/text-info-content/) // que diga algo como una bievenida y que para empezar a charlar en los rooms tenes que logearte y el boton de google (Unete a la conversacion!)
+----done----
+8-mejorar la UI (cambiar diseño de la barra en los mensajes, y muchisimas mas cosas)
+----kinda???----
+
+9-agregar al boton de agregar canal una label, ver fonts, cambiarle el favicon y el titulo
+---kinda done----
+10-ver lo del grid en el lado derecho y container
+
+11-dar toques finales y usar el acomodar el codigo, tambien puedo escribir algo de documentacion
+cuando todo este terminado eliminar todo lo guardado en la db y empezar de nuevo

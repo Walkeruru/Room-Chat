@@ -1,45 +1,73 @@
-import MensajeEnviado from './MensajeEnviado';
-import MensajeRecibido from './MensajeRecibido';
-import db from '../firebase';
-import { collectionGroup, query, where, onSnapshot } from "firebase/firestore";
-import '../styles/Mensaje.css';
-import { useEffect, useState } from 'react';
+import MensajeEnviado from "./MensajeEnviado";
+import MensajeRecibido from "./MensajeRecibido";
+import { useEffect, useState, useRef } from "react";
+import { db } from "../firebase";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 
-const Mensajes = () => {
-    const [datos, setDatos] = useState([])
+//styles imports
+import Container from "@mui/material/Container";
+import "../styles/mensaje.css";
 
-    useEffect(()=>{
-        let ignore = false; // evita el doble render
-        async function fetchData() {
-            const mensajes = query(collectionGroup(db, 'mensajes'))
-            onSnapshot(mensajes,(doc) => {
-                if (!ignore) {
-                    doc.docChanges().forEach(x =>{
-                        console.log(x);
-                        if(x.type==='added'){
-                            setDatos(prevState => prevState.concat(x.doc.data()))
-                        }
-                    })
-                  }
-            })
+const Mensajes = (props) => {
+  const [datos, setDatos] = useState([]);
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(scrollToBottom, [datos]);
+
+  useEffect(() => {
+    let ignore = false; // evita el doble render
+    async function fetchData() {
+      const mensajes = query(
+        collection(db, "TestUsuario", props.canal, "mensajes"),
+        orderBy("time", "asc")
+      );
+      onSnapshot(mensajes, (doc) => {
+        if (!ignore) {
+          doc.docChanges().forEach((x) => {
+            if (x.type === "added") {
+              setDatos((prevState) => prevState.concat(x.doc.data()));
+            }
+          });
         }
-        fetchData();
-        return () => {
-            ignore = true;
-          }
-    },[])
+      });
+    }
+    fetchData();
+    return () => {
+      ignore = true;
+      setDatos([]);
+    };
+  }, [props.canal]);
 
-    return (
-        <>
-            <div className="contenedo_msj">
-                {datos.map(dato => {
-                   if(dato.id == 'Walkeruru'){
-                    return <MensajeEnviado mensaje={dato.mensaje} tiempo={dato.time} key={crypto.randomUUID()}></MensajeEnviado>
-                   }else return <MensajeRecibido mensaje={dato.mensaje} tiempo={dato.time} key={crypto.randomUUID()}></MensajeRecibido>
-                })}
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <Container className="contenedo_msj">
+        {datos.map((dato) => {
+          if (dato.id == props.user) {
+            return (
+              <MensajeEnviado
+                mensaje={dato.mensaje}
+                tiempo={dato.time}
+                key={dato.key}
+                src={dato.image}
+              ></MensajeEnviado>
+            );
+          } else
+            return (
+              <MensajeRecibido
+                mensaje={dato.mensaje}
+                tiempo={dato.time}
+                key={dato.key}
+                src={dato.image}
+                id={dato.id}
+              ></MensajeRecibido>
+            );
+        })}
+        <div ref={messagesEndRef} />
+      </Container>
+    </>
+  );
+};
 
-export default Mensajes
+export default Mensajes;

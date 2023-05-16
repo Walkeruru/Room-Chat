@@ -1,0 +1,7 @@
+.canalContainer:hover{
+    cursor:pointer;
+    background-color: #7575756e;
+}
+.canalContainer:active{
+    transform: translateY(2px);
+}
